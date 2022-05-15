@@ -232,7 +232,7 @@ public class GumballStateTest {
         // on invocation of dispense()
         // Assert that the outputStream contains the expected text.
 
-        GumballState initialState = StateEnum.valueOf( initialStateName );
+        GumballState initialState = StateEnum.valueOf(initialStateName);
         var triggerAction = triggerMap.get(triggerName);
 
         when(ctx.isEmpty()).thenReturn(empty);

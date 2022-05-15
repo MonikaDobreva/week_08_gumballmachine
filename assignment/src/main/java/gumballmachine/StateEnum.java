@@ -11,7 +11,15 @@ enum StateEnum implements GumballState {
      * NO_COIN only reacts tho insertCoin and will go to hasCoin.
      */
     NO_COIN( "You must put in a coin before you can continue" ) {
-        // TODO Implement state NO_COIN
+        @Override
+        public void insertCoin(Context gbm){
+            if (!gbm.isEmpty()){
+                gbm.changeState(StateEnum.HAS_COIN);
+                gbm.getOutput().println("You inserted a coin");
+            } else {
+                printReasonUnsupportedOperation(gbm);
+            }
+        }
         
     },
 
@@ -25,24 +33,60 @@ enum StateEnum implements GumballState {
      * </ul>
      */
     HAS_COIN( "You should draw to get your ball" ) {
-        // TODO Implement state HAS_COIN
-        
+        @Override
+        public void ejectCoin(Context gbm){
+            gbm.changeState(StateEnum.NO_COIN);
+            gbm.getOutput().println("Quarter returned");
+        }
+
+        @Override
+        public void draw(Context gbm){
+            gbm.dispense();
+
+            if(gbm.isEmpty()){
+                gbm.changeState(StateEnum.SOLD_OUT);
+                gbm.getOutput().println("OlifantysGumBall");
+            } else if (gbm.isWinner()){
+                gbm.changeState(StateEnum.WINNER);
+                gbm.getOutput().println("OlifantysGumBall");
+            } else {
+                gbm.changeState(StateEnum.NO_COIN);
+                gbm.getOutput().println("OlifantysGumBall");
+            }
+        }
     },
 
     /**
      * SOLD_OUT reacts only to refill and with that goes to NO_COIN.
      */
     SOLD_OUT( "Machine is empty, waiting for refill" ) {
-        //TODO Implement state SOLD_OUT
-        
+        @Override
+        public void refill(Context gbm, int count) {
+            printReasonUnsupportedOperation(gbm);
+
+            gbm.addBalls(count);
+            gbm.getOutput().println("refilled with " + count + " balls");
+
+            gbm.changeState(StateEnum.NO_COIN);
+        }
     },
 
     /**
      * WINNER reacts only to draw and goes to either SOLD_OUT or NO_COIN.
      */
     WINNER( "You should draw once more to get an extra ball" ) {
-        //TODO Implement state WINNER 
-        
+        @Override
+        public void draw(Context gbm){
+            gbm.dispense();
+
+            if(gbm.isEmpty()){
+                gbm.changeState(StateEnum.SOLD_OUT);
+                gbm.getOutput().println("OlifantysGumball");
+            } else{
+                gbm.changeState(StateEnum.NO_COIN);
+                gbm.getOutput().println("You got two gumballs for your coin");
+            }
+        }
     };
     
     /**

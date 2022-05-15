@@ -13,13 +13,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import static org.mockito.ArgumentMatchers.*;
 import org.mockito.Mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.Mockito.*;
 
 /**
  * Example of using Parameterized tests with mockito.
@@ -124,9 +122,25 @@ public class GumballStateTest {
         // Invoke the trigger method.
         // Verify that changeState(<finalState>) has been invoked the appropriate
         //    number of times (0 if no state change, 1 if new final state).
-        
-        //TODO 01 Test correct state transition first and implement necessary parts of StateEnum afterwards.
-        fail("Test method t1verifyStateTransition not yet implemented " );
+
+        GumballState initialState = StateEnum.valueOf(initialStateName);
+        var triggerAction = triggerMap.get(triggerName);
+
+        when(ctx.isEmpty())
+                .thenReturn(empty);
+        when(ctx.isWinner())
+                .thenReturn(winner);
+
+        triggerAction.accept(ctx, initialState);
+
+        if(finalStateName == null){
+            verify(ctx, never()).changeState(initialState);
+        } else{
+            GumballState endState = StateEnum.valueOf(finalStateName);
+            verify(ctx, times(1)).changeState(endState);
+        }
+
+        //fail("Test method t1verifyStateTransition not yet implemented " );
     }
 
     /**
@@ -151,9 +165,14 @@ public class GumballStateTest {
 
         // Verify that addBalls is invoked on the context with anyInt() as 
         // parameter. No training of Mock needed here.
-        
-        //TODO 02 Implement test refill first and implement necessary parts of StateEnum afterwards.
-        fail("Test method t2verifyRefillAddsBalls not yet implemented" );
+
+        GumballState initialState = StateEnum.valueOf(initialStateName);
+        var triggerAction = triggerMap.get(triggerName);
+        triggerAction.accept(ctx, initialState);
+
+        verify(ctx, times(addBallsCount)).addBalls(anyInt());
+
+        //fail("Test method t2verifyRefillAddsBalls not yet implemented" );
     }
 
     /**
@@ -178,9 +197,14 @@ public class GumballStateTest {
 
         // Verify that the number of times the dispense() method is invoked 
         // on the context is correct. No training of Mock needed here.
-        
-        //TODO 03 Test that balls are dispensed in proper states and implement necessary parts of StateEnum afterwards.
-        fail("Test method t3verifyDispense not implemented" );
+
+        GumballState initialState = StateEnum.valueOf(initialStateName);
+        var triggerAction = triggerMap.get(triggerName);
+        triggerAction.accept(ctx, initialState);
+
+        verify(ctx, times(dispenseCount)).dispense();
+
+        //fail("Test method t3verifyDispense not implemented" );
     }
 
     /**
@@ -207,8 +231,17 @@ public class GumballStateTest {
         // Train the mock to return a new Gumball object with chosen color
         // on invocation of dispense()
         // Assert that the outputStream contains the expected text.
-        
-        //TODO 04 Make sure the message contains the correct info and implement necessary parts of StateEnum afterwards.
-        fail("Test method t4assertMessage not yet implemented" );
+
+        GumballState initialState = StateEnum.valueOf( initialStateName );
+        var triggerAction = triggerMap.get(triggerName);
+
+        when(ctx.isEmpty()).thenReturn(empty);
+        when(ctx.isWinner()).thenReturn(winner);
+        when(ctx.dispense()).thenReturn(new Gumball("red"));
+
+        triggerAction.accept(ctx, initialState);
+
+        assertThat(sout).asString().contains(expectedText);
+        //fail("Test method t4assertMessage not yet implemented" );
     }
 }

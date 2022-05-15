@@ -1,7 +1,7 @@
 #Start State,trigger,End State,empty,winner,dispense,refills,expected text
-HAS_COIN,draw,NO_COIN,FALSE,FALSE,1,0,Gumball
-HAS_COIN,draw,SOLD_OUT,TRUE,TRUE,1,0,Gumball
-HAS_COIN,draw,WINNER,FALSE,TRUE,1,0,Gumball
+HAS_COIN,draw,NO_COIN,FALSE,FALSE,1,0,OlifantysGumBall
+HAS_COIN,draw,SOLD_OUT,TRUE,TRUE,1,0,OlifantysGumBall
+HAS_COIN,draw,WINNER,FALSE,TRUE,1,0,OlifantysGumBall
 HAS_COIN,ejectCoin,NO_COIN,FALSE,FALSE,0,0,Quarter returned
 HAS_COIN,insertCoin,,FALSE,FALSE,0,0,You should draw to get your ball
 HAS_COIN,refill,,TRUE,FALSE,0,1,refilled

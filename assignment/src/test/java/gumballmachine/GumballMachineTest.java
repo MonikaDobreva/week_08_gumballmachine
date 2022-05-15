@@ -181,7 +181,7 @@ public class GumballMachineTest {
                 break;
             }
         }
-        
+
         assertThat(win).isTrue();
 
         //fail( "isThereEverAWinner not implemented yet" );

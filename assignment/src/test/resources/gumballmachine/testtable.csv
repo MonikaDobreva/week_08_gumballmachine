@@ -14,7 +14,7 @@ SOLD_OUT,insertCoin,,FALSE,FALSE,0,0,Machine is empty
 SOLD_OUT,insertCoin,,FALSE,FALSE,0,0,Machine is empty
 SOLD_OUT,refill,NO_COIN,FALSE,FALSE,0,1,refilled
 WINNER,draw,NO_COIN,FALSE,FALSE,1,0,You got two gumballs for your coin
-WINNER,draw,SOLD_OUT,TRUE,TRUE,1,0,Gumball
+WINNER,draw,SOLD_OUT,TRUE,TRUE,1,0,You got two gumballs for your coin
 WINNER,insertCoin,,FALSE,FALSE,0,0,You should draw once more to get an extra ball
 WINNER,insertCoin,,FALSE,FALSE,0,0,You should draw once more to get an extra ball
 WINNER,refill,,FALSE,FALSE,0,1,refilled

@@ -81,7 +81,7 @@ enum StateEnum implements GumballState {
 
             if(gbm.isEmpty()){
                 gbm.changeState(StateEnum.SOLD_OUT);
-                gbm.getOutput().println("You got two gumballs for your coin");
+                gbm.getOutput().println("Gumball");
             } else{
                 gbm.changeState(StateEnum.NO_COIN);
                 gbm.getOutput().println("You got two gumballs for your coin");

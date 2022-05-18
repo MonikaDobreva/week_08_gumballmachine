@@ -235,9 +235,9 @@ public class GumballStateTest {
         GumballState initialState = StateEnum.valueOf(initialStateName);
         var triggerAction = triggerMap.get(triggerName);
 
-        /*when(ctx.isEmpty()).thenReturn(empty);
-        when(ctx.isWinner()).thenReturn(winner);*/
-        when(ctx.dispense()).thenReturn(new Gumball("red"));
+        when(ctx.isEmpty()).thenReturn(empty);
+        when(ctx.isWinner()).thenReturn(winner);
+        when(ctx.dispense()).thenReturn(new Gumball("RED"));
 
         triggerAction.accept(ctx, initialState);
         assertThat(sout).asString().contains(expectedText);

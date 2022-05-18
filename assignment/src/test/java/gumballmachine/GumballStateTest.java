@@ -235,13 +235,13 @@ public class GumballStateTest {
         GumballState initialState = StateEnum.valueOf(initialStateName);
         var triggerAction = triggerMap.get(triggerName);
 
-        when(ctx.isEmpty()).thenReturn(empty);
-        when(ctx.isWinner()).thenReturn(winner);
+        /*when(ctx.isEmpty()).thenReturn(empty);
+        when(ctx.isWinner()).thenReturn(winner);*/
         when(ctx.dispense()).thenReturn(new Gumball("red"));
 
         triggerAction.accept(ctx, initialState);
-
         assertThat(sout).asString().contains(expectedText);
+
         //fail("Test method t4assertMessage not yet implemented" );
     }
 }

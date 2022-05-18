@@ -84,7 +84,7 @@ enum StateEnum implements GumballState {
                 gbm.getOutput().println("Gumball");
             } else{
                 gbm.changeState(StateEnum.NO_COIN);
-                gbm.getOutput().println("You got two gumballs for your coin");
+                gbm.getOutput().println("You got two gumballs for your coin Gumball");
             }
         }
     };
